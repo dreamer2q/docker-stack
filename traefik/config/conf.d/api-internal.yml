@@ -1,0 +1,15 @@
+
+http:
+  middlewares:
+    api-auth:
+      basicAuth:
+        users:
+          # redhome:Ubuntu16.04
+          - redhome:$apr1$xhdLmjQg$lkO4ZYV8VtXO0g/ikmSrb0
+  routers:
+    api:
+      rule: "Host(`traefik.dreamer2q.wang`)"
+      # middlewares:
+      #  - "api-auth"
+      service: api@internal
+

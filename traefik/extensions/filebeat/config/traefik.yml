@@ -1,0 +1,6 @@
+
+- module: traefik
+  access:
+     enabled: true
+     var.paths: ["/var/log/traefik*.log"]
+

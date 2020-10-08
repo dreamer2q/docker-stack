@@ -1,0 +1,34 @@
+
+version: "3.3"
+
+services:
+  traefik:
+    image: "traefik:2.2" 
+    networks:
+     - my-app
+    ports:
+      - target: 80
+        published: 80
+        mode: host
+    volumes:
+      # 自动申请的证书存放位置，我们需要在当前目录创建 letsencrypt 目录
+      # - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      # log 
+      - "/var/log:/var/log"
+      # 绑定我们的配置目录
+      - "/matrix/docker-stack/traefik/config:/etc/traefik"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname==myjj"
+        
+
+networks:
+  my-app:
+    external: true
+ #elk:
+ #  external: true
+
